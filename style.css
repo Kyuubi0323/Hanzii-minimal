@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.input-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+#charInput {
+  font-size: 28px;
+  width: 250px;
+  height: 80px;
+  text-align: center;
+  border: 3px solid #667eea;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  background: #f8f9ff;
+}
+
+#charInput:focus {
+  border-color: #764ba2;
+  box-shadow: 0 0 0 4px rgba(118, 75, 162, 0.1);
+  transform: scale(1.05);
+}
+
+#drawBtn {
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+#drawBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+#drawBtn:active {
+  transform: translateY(0);
+}
+
+#writer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.char-box {
+  width: 200px;
+  height: 200px;
+  border: 3px solid #e0e0e0;
+  border-radius: 12px;
+  background: #fafafa;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.info {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f0f4ff;
+  border-radius: 8px;
+  color: #555;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  #charInput {
+    width: 200px;
+    height: 70px;
+    font-size: 24px;
+  }
+
+  .char-box {
+    width: 150px;
+    height: 150px;
+  }
+}

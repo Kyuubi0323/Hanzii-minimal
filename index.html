@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hanzi Stroke Order Demo</title>
+
+  <!-- Hanzi Writer CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 20px;
+    }
+    #writer {
+      width: 200px;
+      height: 200px;
+      margin-top: 20px;
+      border: 1px solid #ddd;
+    }
+    input {
+      font-size: 18px;
+      width: 80px;
+      text-align: center;
+    }
+    button {
+      margin-left: 10px;
+      padding: 6px 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Hanzi Stroke Order</h2>
+
+  <input id="charInput" maxlength="1" placeholder="字" />
+  <button id="drawBtn">Vẽ nét</button>
+
+  <div id="writer"></div>
+
+  <script>
+    let writer = null;
+
+    document.getElementById('drawBtn').onclick = function () {
+      const char = document.getElementById('charInput').value.trim();
+      if (!char) return;
+
+      // clear div cũ
+      document.getElementById('writer').innerHTML = '';
+
+      writer = HanziWriter.create('writer', char, {
+        width: 200,
+        height: 200,
+        padding: 10,
+        showOutline: true,
+        showCharacter: false,
+        strokeAnimationSpeed: 1,
+      });
+
+      writer.animateCharacter();
+    };
+  </script>
+</body>
+</html>

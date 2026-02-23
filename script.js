@@ -1,6 +1,36 @@
 let writers = [];
 
+async function translateText(text) {
+  const box = document.getElementById('translation-box');
+  const el = document.getElementById('translation-text');
+  box.style.display = 'block';
+  el.textContent = 'Translating…';
+  el.className = 'translation-text loading';
+  try {
+    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=zh|en`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const result = data?.responseData?.translatedText;
+    if (result) {
+      el.textContent = result;
+    } else {
+      el.textContent = 'Translation not available.';
+    }
+  } catch (e) {
+    el.textContent = 'Translation failed. Check your connection.';
+  }
+  el.className = 'translation-text';
+}
+
 function drawCharacter() {
+  const input = document.getElementById('charInput').value.trim();
+  // hide translation when re-drawing
+  document.getElementById('translation-box').style.display = 'none';
+  originalDraw();
+  translateText(input);
+}
+
+function originalDraw() {
   const input = document.getElementById('charInput').value.trim();
   if (!input) {
     alert('Please enter Chinese characters!');
@@ -15,14 +45,22 @@ function drawCharacter() {
   // create a box for each character
   for (let i = 0; i < input.length; i++) {
     const char = input[i];
-    
-    // create container div for this character
+
+    const charWrapper = document.createElement('div');
+    charWrapper.className = 'char-wrapper';
+    writerContainer.appendChild(charWrapper);
+
     const charBox = document.createElement('div');
     charBox.className = 'char-box';
     charBox.id = 'char-' + i;
-    writerContainer.appendChild(charBox);
+    charWrapper.appendChild(charBox);
 
-    // create HanziWriter instance
+    const pinyinLabel = document.createElement('div');
+    pinyinLabel.className = 'char-pinyin';
+    const py = pinyinPro.pinyin(char, { toneType: 'symbol', type: 'string' });
+    pinyinLabel.textContent = py || char;
+    charWrapper.appendChild(pinyinLabel);
+
     const writer = HanziWriter.create('char-' + i, char, {
       width: 200,
       height: 200,
@@ -35,8 +73,7 @@ function drawCharacter() {
     });
 
     writers.push(writer);
-    
-    // animate with slight delay for each character, then loop
+
     setTimeout(() => {
       writer.loopCharacterAnimation();
     }, i * 200);

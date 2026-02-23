@@ -6,6 +6,9 @@
 
   <!-- Hanzi Writer CDN -->
   <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+
+  <!-- Pinyin Pro CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3/dist/index.js"></script>
   
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
@@ -22,6 +25,11 @@
     </div>
 
     <div id="writer"></div>
+
+    <div id="translation-box" class="translation-box" style="display:none">
+      <div class="translation-label">English</div>
+      <div id="translation-text" class="translation-text"></div>
+    </div>
 
     <div class="info">
       Enter one or more Chinese characters and click "Draw" to see the stroke order animation

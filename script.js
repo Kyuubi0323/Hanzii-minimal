@@ -7,10 +7,11 @@ async function translateText(text) {
   el.textContent = 'Translating…';
   el.className = 'translation-text loading';
   try {
-    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=zh|en`;
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=zh-CN&tl=en&dt=t&q=${encodeURIComponent(text)}`;
     const res = await fetch(url);
     const data = await res.json();
-    const result = data?.responseData?.translatedText;
+    // response is a nested array: data[0] = array of [translatedChunk, original, ...]
+    const result = data[0].map(chunk => chunk[0]).join('');
     if (result) {
       el.textContent = result;
     } else {
